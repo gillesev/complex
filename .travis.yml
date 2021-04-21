@@ -1,0 +1,26 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t gillesev/complex-test -f ./client/Dockerfile.dev ./client
+
+# -- --coverage is to make sure that we exit as npm test enters watch mode
+# and would never exit otherwise.
+scripts:
+  - docker run -e CI=true gillesev/complex-test npm test -- --coverage
+
+# if unit tests pass, then build production containers one at a time.
+after_success:
+  - docker build -t gillesev/complex-client ./client
+  - docker build -t gillesev/complex-gateway ./nginx
+  - docker build -t gillesev/complex-server ./server
+  - docker build -t gillesev/complex-worker ./worker
+  # login into Docker Hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push images to docker hub
+  - docker push gillesev/complex-client
+  - docker push gillesev/complex-gateway
+  - docker push gillesev/complex-server
+  - docker push gillesev/complex-worker
+
