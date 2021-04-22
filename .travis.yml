@@ -29,7 +29,7 @@ deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
   app: "complex"
-  env: "Complex-env"
+  env: "Complex-env-1"
   bucket_name: "elasticbeanstalk-us-east-1-506822390994"
   bucket_path: "complex"
   on:
