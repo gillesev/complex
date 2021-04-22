@@ -5,24 +5,28 @@
       "name": "complex-client",
       "image": "gillesev/complex-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "complex-server",
       "image": "gillesev/complex-server",
       "hostname": "api",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "complex-worker",
       "image": "gillesev/complex-worker",
       "hostname": "worker",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "complex-gateway",
       "image": "gillesev/complex-gateway",
       "essential": true,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": 80,
