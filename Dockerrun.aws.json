@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "complex-client",
+      "image": "gillesev/complex-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "complex-server",
+      "image": "gillesev/complex-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "complex-worker",
+      "image": "gillesev/complex-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "complex-gateway",
+      "image": "gillesev/complex-gateway",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["complex-client", "complex-server"]
+    }       
+  ]
+}
+
